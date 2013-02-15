@@ -111,8 +111,23 @@ class Monitor
   #the absolute value may be in error by perhaps 25% however it is expected that 
   #relative values are more significant 
   def watts
+    (cal_watts if calibration_configured?) || raw_watts
+  end
+
+  #is calibration in the config file?
+  def calibation_configured?
+    @@config[:calibration] && @@config[:calibration][:expected] && @@config[:calibration][:reported]
+  end
+
+  #precalibration value
+  def raw_watts
     #RMScurrent is in microamps and depends on the clamp rating
     @instantRMScurrent*@@config[:voltage]*@@config[:rating][@serialnum]/20000000.0
+  end
+
+  #calibrated value
+  def cal_watts
+    raw_watts * @@config[:calibration][:expected].to_f/@@config[:calibration][:reported].to_f 
   end
 
   #name the contanier after the measurement name
