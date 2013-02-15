@@ -1,0 +1,49 @@
+---
+#
+# C-Tech monitor config file
+# (does not allow tab characters)
+#
+:host:          energyforchange.ac.uk
+:run_after:     2013-02-15 12:16:00
+:deployment:    test01
+:voltage:       230
+:srcsource:     c-tech-admin@energyforchange.ac.uk:~/c-tech
+:circuits:
+  '0501':       mp1
+  '0502':       mp2
+  '0503':       mp3
+  '0504':       mp4
+  '0505':       mp5
+  '0506':       mp6
+  '0507':       mp7
+  '0508':       mp8
+  '0509':       mp9
+  '0510':       mp10
+  '0511':       mp11
+  '0512':       mp12
+  '0513':       mp13
+  '0514':       mp14
+  '0515':       mp15
+  '0516':       mp16
+  '0517':       mp17
+  '0518':       mp18
+:rating:
+  '0501':       50
+  '0502':       50
+  '0503':       50
+  '0504':       50 
+  '0505':       50 
+  '0506':       50 
+  '0507':       50 
+  '0508':       50 
+  '0509':       50 
+  '0510':       50 
+  '0511':       50 
+  '0512':       50 
+  '0513':       25 
+  '0514':       25 
+  '0515':       25 
+  '0516':       25 
+  '0517':       25 
+  '0518':       25 
+

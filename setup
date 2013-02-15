@@ -1,0 +1,26 @@
+
+#
+#Setup required on a new plug computer
+#
+
+#
+#log in and create a new directory in root for the files
+#
+
+#
+#install rvm
+#
+
+#set hostname
+
+#setup ssh
+#ssh-keygen -t rsa -f /root/.ssh/id_rsa_#{hostname} -P ""
+
+#copy the key to the server
+#cp /root/.ssh/id_rsa_#{hostname}.pub c-tech-admin@energyforchange.ac.uk:~/.ssh
+
+#
+#ssh to the server and add the key to authorised_keys
+#
+
+
