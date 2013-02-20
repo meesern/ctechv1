@@ -60,12 +60,9 @@ class Monitor
   def propose(reading)
     #accept the first non null serial number read
     @serialnum = reading["serialnum"] if @serialnum.nil?
-    if @serialnum && @circuit.nil?
-      @circuit = @@config[:circuits][@serialnum]
-    end
 
     case 
-      when @circuit.nil?
+      when circuit.nil?
         return :unconfigured
       when reading["serialnum"].nil? || reading["samples"].nil? || reading["instantRMScurrent"].nil?
         return :read_fail
@@ -97,9 +94,16 @@ class Monitor
   #timestream feeder will reuse the existing timestream container based on name if it exists
   #or will create a new container (on the server)
   def timestream
+    #reset if the timestream container name changes.
+    (@ts_container = container && reset_timestream) unless @ts_container == container
     #Set up the timestream feeder
     @timestream || @timestream = TimestreamFeeder.new(:host => @@config[:host],
-			  :container_name => container)
+			  :container_name => @ts_container)
+  end
+
+  #reset the timestream
+  def reset_timestream
+    @timestream = nil
   end
 
   #post the measurement to the timestream
@@ -115,6 +119,10 @@ class Monitor
     @instantRMScurrent*@@config[:voltage]*@@config[:rating][@serialnum]/20000000.0
   end
 
+  def circuit
+    @@config[:circuits][@serialnum] if @serialnum
+  end
+
   #name the contanier after the measurement name
   def container
     name
@@ -124,7 +132,7 @@ class Monitor
   #in this way if we rework the sensors (because of a failure for example
   #new data can be properly assigned by remapping circuits in the config file
   def name
-    "#{@@config[:deployment]}_#{@circuit}"
+    "#{@@config[:deployment]}_#{circuit}"
   end
 end
 
