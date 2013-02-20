@@ -167,7 +167,7 @@ return  #disable for now until I sort out accounts and permissions
   #config file that asks for a restart can not trigger before
   #the new source has loaded
   puts "syncing source with #{$config[:srcsource]} at #{Time.now}"
-  puts `rsync -e ssh #{$config[:srcsource]} #{$src}`
+  puts `rsync -avz -e ssh #{$config[:srcsource]} #{$src}`
 end
 
 #read the yaml config
