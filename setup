@@ -4,12 +4,19 @@
 #
 
 #
-#log in and create a new directory in root for the files
+#To get and run this script you should 
+#  login as root to the plug computer 
+#  look to the proxy settings in /etc/bash.bashrc
+#  run:
+#    wget https://github.com/meesern/ctechv1/archive/master.zip; unzip master.zip;
+#    cd ctechv1-master; ./setup
 #
 
 #
-#install rvm
+#Install rvm
+# Prepare by fetching the required packages
 #
+apt-get -y install screen build-essential bison openssl libreadline5 libreadline-dev curl git-core zlib1g zlib1g-dev libssl-dev vim-full libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev autoconf libyaml-dev
 
 #set hostname
 
