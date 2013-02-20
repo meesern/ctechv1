@@ -26,7 +26,7 @@ apt-get -y --force-yes install screen build-essential bison openssl libreadline5
 #Setup monit to include c-tech's monitrc
 cd /root/ctechv1-master
 mkdir /etc/monit.d -p
-if [ ! -f /etc/c-tech-monitrc ];
+if [ ! -f /etc/monit.d/c-tech-monitrc ];
 then
   echo "include /etc/monit.d/*" >> /etc/monit/monitrc
   cp default.monit /etc/default/monit
