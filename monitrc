@@ -1,21 +1,24 @@
 #
 # Monit system monitor configuration
 #
+# Install by running setup
+#
+# If installing by hand then...
 # Install monit with apt-get install monit
-# Append the line 'include /root/c-tech/monitrc' to the file
-# /etc/monit/monitrc
+# Append the line 'include /root/ctechv1-master/monitrc' to the file
+#   /etc/monit/monitrc
 # And don't forget to enable startup in /etc/default/monit
 #
 
-check process ruby with pidfile /root/c-tech/c-tech.pid
-  start program = "/bin/bash -c 'cd /root/c-tech; /usr/local/rvm/rubies/ruby-1.9.3-p286/bin/ruby /root/c-tech/c-tech.rb >& /root/c-tech/log/logfile &'"
-  stop program = "/bin/kill `/bin/cat /root/c-tech/c-tech.pid`"
+check process ruby with pidfile /root/ctechv1-master/c-tech.pid
+  start program = "/bin/bash -c 'cd /root/ctechv1-master;/usr/local/rvm/rubies/default/bin/ruby /root/ctechv1-master/c-tech.rb >& /root/ctechv1-master/log/logfile &'"
+  stop program = "/bin/kill `/bin/cat /root/ctechv1-master/c-tech.pid`"
   if cpu > 80% for 5 cycles then restart
   if totalmem > 200.0 MB for 5 cycles then restart
   if loadavg(5min) greater than 10 for 8 cycles then stop
   if 20 restarts within 30 cycles then timeout
 
 check device rootfs with path /
-  if space usage > 90% then exec "/root/c-tech/cleanup"
+  if space usage > 90% then exec "/root/ctechv1-master/cleanup"
 
 
