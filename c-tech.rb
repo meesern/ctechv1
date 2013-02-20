@@ -95,7 +95,7 @@ class Monitor
   #or will create a new container (on the server)
   def timestream
     #reset if the timestream container name changes.
-    (@ts_container = container && reset_timestream) unless @ts_container == container
+    ((@ts_container = container) && reset_timestream) unless @ts_container == container
     #Set up the timestream feeder
     @timestream || @timestream = TimestreamFeeder.new(:host => @@config[:host],
 			  :container_name => @ts_container)
@@ -115,12 +115,27 @@ class Monitor
   #the absolute value may be in error by perhaps 25% however it is expected that 
   #relative values are more significant 
   def watts
+    ((cal_watts if calibration_configured?) || raw_watts).round(3)
+  end
+
+  #is calibration in the config file?
+  def calibration_configured?
+    @@config[:calibration] && @@config[:calibration][:expected] && @@config[:calibration][:reported]
+  end
+
+  #precalibration value
+  def raw_watts
     #RMScurrent is in microamps and depends on the clamp rating
     @instantRMScurrent*@@config[:voltage]*@@config[:rating][@serialnum]/20000000.0
   end
 
   def circuit
     @@config[:circuits][@serialnum] if @serialnum
+  end
+
+  #calibrated value
+  def cal_watts
+    raw_watts * @@config[:calibration][:expected].to_f/@@config[:calibration][:reported].to_f 
   end
 
   #name the contanier after the measurement name

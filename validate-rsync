@@ -1,0 +1,36 @@
+#!/bin/sh 
+#
+# This script runs in the _server_ and is called by all restricted SSH key
+# accesses. It permits only rsync commands to be executed.
+#
+
+case "$SSH_ORIGINAL_COMMAND" in 
+*\&*) 
+echo "Rejected" 
+;; 
+*\(*) 
+echo "Rejected" 
+;; 
+*\{*) 
+echo "Rejected" 
+;; 
+*\;*) 
+echo "Rejected" 
+;; 
+*\<*) 
+echo "Rejected" 
+;; 
+*\`*) 
+echo "Rejected" 
+;; 
+*\|*) 
+echo "Rejected" 
+;; 
+rsync\ --server*) 
+$SSH_ORIGINAL_COMMAND 
+;; 
+*) 
+echo "Rejected" 
+;; 
+esac 
+
