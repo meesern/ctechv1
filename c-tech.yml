@@ -10,17 +10,17 @@
 
 #Set :deployment to name the timestreams and datafiles according to where the 
 #system is currently deployed
-:deployment:    test01
+:deployment:    ant01
 
 #Set :run_after to reset the running program
 #the code will exit if it started execution before the :run_after time
 #which could be the time of a change to the source code for example.
 #The code will not restart immediatly but rather waits for monit to restart it.
-:run_after:     2013-02-15 12:16:00
+:run_after:     2013-02-20 08:46:00
 
 #Set the source of the code for the deployment to update from.  It is assumed that ssh keys 
 #have been setup appropriatly to allow rsync access to this location without password.
-:srcsource:     c-tech-admin@energyforchange.ac.uk:~/c-tech
+:srcsource:     c-tech-admin@energyforchange.ac.uk:~/ctechv1
 
 #Set the voltage assumed for the monitors circuits.  This could in fact vary between 210 and 250
 #if the actual value is know is could be set here.  Use the calibration section to adjust the 
@@ -40,24 +40,24 @@
 #Monitors are only saved when this mapping is set
 #Curcuit names should be brief and lower case.
 :circuits:
-  '0501':       mp1
-  '0502':       mp2
-  '0503':       mp3
-  '0504':       mp4
-  '0505':       mp5
-  '0506':       mp6
-  '0507':       mp7
-  '0508':       mp8
-  '0509':       mp9
-  '0510':       mp10
-  '0511':       mp11
-  '0512':       mp12
-  '0513':       mp13
-  '0514':       mp14
-  '0515':       mp15
-  '0516':       mp16
-  '0517':       mp17
-  '0518':       mp18
+  '0501':       
+  '0502':       
+  '0503':       
+  '0504':       
+  '0505':       
+  '0506':       
+  '0507':       
+  '0508':       
+  '0509':       
+  '0510':       
+  '0511':       
+  '0512':       
+  '0513':       
+  '0514':       
+  '0515':       
+  '0516':       
+  '0517':       
+  '0518':       
 
 #Set rated ampage of each current clamp according to it's serial number.
 #Correct settings here are necessary for correctl reporting in Watts.  If your calibration is

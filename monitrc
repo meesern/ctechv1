@@ -13,7 +13,7 @@ check process ruby with pidfile /root/c-tech/c-tech.pid
   if cpu > 80% for 5 cycles then restart
   if totalmem > 200.0 MB for 5 cycles then restart
   if loadavg(5min) greater than 10 for 8 cycles then stop
-  if 3 restarts within 5 cycles then timeout
+  if 20 restarts within 30 cycles then timeout
 
 check device rootfs with path /
   if space usage > 90% then exec "/root/c-tech/cleanup"
