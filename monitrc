@@ -8,7 +8,7 @@
 #
 
 check process ruby with pidfile /root/c-tech/c-tech.pid
-  start program = "/bin/bash -c 'cd /root/c-tech; /usr/local/rvm/rubies/ruby-1.9.3-p286/bin/ruby /root/c-tech/c-tech.rb >& /root/c-tech/log/logfile &'"
+  start program = "/bin/bash -c 'cd /root/c-tech; /usr/local/rvm/rubies/default/bin/ruby /root/c-tech/c-tech.rb >& /root/c-tech/log/logfile &'"
   stop program = "/bin/kill `/bin/cat /root/c-tech/c-tech.pid`"
   if cpu > 80% for 5 cycles then restart
   if totalmem > 200.0 MB for 5 cycles then restart
