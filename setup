@@ -1,3 +1,4 @@
+#!/bin/bash
 
 #
 #Setup required on a new plug computer
@@ -14,12 +15,29 @@
 
 #
 #Install rvm
-# Prepare by fetching the required packages
+#  Prepare by fetching the required packages
 #
 apt-get update
 apt-get -y --force-yes install screen build-essential bison openssl libreadline5 libreadline-dev curl git-core zlib1g zlib1g-dev libssl-dev vim-full libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev autoconf libyaml-dev monit
 
-#set hostname
+#  Build RVM and latest ruby (takes a _long_ time)
+\curl -L https://get.rvm.io | bash -s stable --ruby
+
+#Setup monit to include c-tech's monitrc
+cd /root/ctechv1-master
+mkdir /etc/monit.d -p
+if [ ! -f /etc/c-tech-monitrc ];
+then
+  echo "include /etc/monit.d/*" >> /etc/monit/monitrc
+  cp default.monit /etc/default/monit
+  ln -s /root/ctechv1-master/monitrc /etc/monit.d/c-tech-monitrc
+fi
+
+#
+#Create the log and readings directories
+#
+mkdir ./log -p
+mkdir ./readings -p
 
 #setup ssh
 #ssh-keygen -t rsa -f /root/.ssh/id_rsa_#{hostname} -P ""
@@ -30,5 +48,14 @@ apt-get -y --force-yes install screen build-essential bison openssl libreadline5
 #
 #ssh to the server and add the key to authorised_keys
 #
+
+rsync -avz -e ssh c-tech-admin@energyforchange.ac.uk:~/ctechv1/ .
+
+#
+#Install the required ruby gems
+#
+bundle install
+
+echo "Reboot using 'reboot' now to test automatic start-up"
 
 
