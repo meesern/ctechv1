@@ -54,6 +54,8 @@ rsync -avz -e ssh c-tech-admin@energyforchange.ac.uk:~/ctechv1/ .
 #
 #Install the required ruby gems
 #
+source /usr/local/rvm/scripts/rvm
+
 bundle install
 
 echo "Reboot using 'reboot' now to test automatic start-up"
